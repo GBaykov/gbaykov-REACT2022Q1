@@ -9,6 +9,7 @@ export default class Input extends Component<InputProps, InputState> {
     inputValue: '',
   };
   onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    console.log(e.currentTarget.value);
     this.setState({
       inputValue: e.currentTarget.value,
     });
