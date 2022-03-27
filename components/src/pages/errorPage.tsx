@@ -3,7 +3,7 @@ export default class ErrorPage extends Component {
   render() {
     return (
       <main>
-        <p>ABOUT US</p>
+        <p className="message">PAGE NOT FOUND</p>
       </main>
     );
   }

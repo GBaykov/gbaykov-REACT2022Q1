@@ -3,7 +3,7 @@ export default class AboutUsPage extends Component {
   render() {
     return (
       <main>
-        <p>ABOUT US</p>
+        <p className="message">ABOUT US</p>
       </main>
     );
   }
