@@ -37,6 +37,13 @@ export default class SearchBar extends Component<InputProps, InputState> {
   };
 
   render() {
-    return <input type="text" value={this.state.inputValue} onChange={this.onInputChange} />;
+    return (
+      <input
+        placeholder="Search area"
+        type="text"
+        value={this.state.inputValue}
+        onChange={this.onInputChange}
+      />
+    );
   }
 }

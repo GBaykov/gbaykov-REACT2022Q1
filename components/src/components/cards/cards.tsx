@@ -5,6 +5,7 @@ export default class Cards extends Component {
   render() {
     return (
       <section>
+        <div>Cards field</div>
         <Card />
         <Card />
         <Card />

@@ -6,6 +6,7 @@ export default class MainPage extends Component {
   render() {
     return (
       <main>
+        <div>Main Page</div>
         <SearchBar />
         <Cards />
       </main>

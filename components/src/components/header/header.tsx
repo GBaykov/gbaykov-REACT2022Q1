@@ -6,7 +6,7 @@ import ErrorPage from '../../pages/errorPage';
 import AboutUsPage from '../../pages/aboutUs';
 
 export default class Header extends Component {
-  maxId = 100;
+  maxId = 1;
 
   state = {
     pagesNames: [this.createItem('Main Page', ''), this.createItem('About Us', 'about')],
@@ -22,7 +22,7 @@ export default class Header extends Component {
 
   pages = this.state.pagesNames.map((page) => {
     return (
-      <Link to={`/${page.href}`} key={page.id}>
+      <Link className="headder-link" to={`/${page.href}`} key={page.id}>
         {page.label}
       </Link>
     );
