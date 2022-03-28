@@ -30,14 +30,14 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header>
-        {this.pages}
+      <>
+        <header className="header">{this.pages}</header>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-      </header>
+      </>
     );
   }
 }

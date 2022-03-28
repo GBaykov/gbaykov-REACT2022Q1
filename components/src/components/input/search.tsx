@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './search.css';
+
 interface InputState {
   inputValue: null | string;
 }
@@ -39,6 +41,7 @@ export default class SearchBar extends Component<InputProps, InputState> {
   render() {
     return (
       <input
+        className="searchbar"
         placeholder="Search area"
         type="text"
         value={this.state.inputValue}

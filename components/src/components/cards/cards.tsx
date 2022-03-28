@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import Card from '../card';
+import './cards.css';
 
 export default class Cards extends Component {
   render() {
     return (
-      <section>
+      <>
         <div>Cards field</div>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </section>
+        <section className="cards-field">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </section>
+      </>
     );
   }
 }
