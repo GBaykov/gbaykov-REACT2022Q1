@@ -4,7 +4,7 @@ interface InputState {
 }
 interface InputProps {}
 
-export default class Input extends Component<InputProps, InputState> {
+export default class SearchBar extends Component<InputProps, InputState> {
   state = {
     inputValue: '',
   };
