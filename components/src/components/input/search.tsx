@@ -38,15 +38,24 @@ export default class SearchBar extends Component<InputProps, InputState> {
     window.removeEventListener('beforeunload', this.componentCleanup);
   };
 
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
   render() {
     return (
-      <input
-        className="searchbar"
-        placeholder="Search area"
-        type="text"
-        value={this.state.inputValue}
-        onChange={this.onInputChange}
-      />
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          <input
+            className="searchbar"
+            placeholder="Search area"
+            type="text"
+            value={this.state.inputValue}
+            onChange={this.onInputChange}
+          />
+        </label>
+        <input type="submit" value="Отправить" />
+      </form>
     );
   }
 }
