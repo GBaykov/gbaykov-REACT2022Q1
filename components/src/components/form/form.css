@@ -10,6 +10,11 @@
     display: block;
     margin-bottom: 15px;
     max-width:80%;
+}
 
+.error-message{
+    font-size:smaller;
+    font-weight: bold;
+    color: red;
 }
 
