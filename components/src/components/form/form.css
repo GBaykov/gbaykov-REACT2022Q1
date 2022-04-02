@@ -1,0 +1,10 @@
+.form{
+    width: 40%;
+}
+
+.form-element{
+    display: block;
+    margin-bottom: 15px;
+    max-width:80%;
+
+}
