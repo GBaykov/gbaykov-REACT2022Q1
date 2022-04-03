@@ -1,4 +1,3 @@
-import React from 'react';
 import { IErrors } from './form';
 
 export function validateDate(value: string | undefined | Date) {
@@ -19,7 +18,7 @@ export function inputErrHandler(value: string | undefined) {
 }
 export function errorHandler(values: IErrors) {
   const res: IErrors = {
-    files: undefined,
+    files: '',
   };
   if (!values.nameInput || values.nameInput.length < 2 || values.nameInput.length > 15) {
     res.nameInput = 'nameinput';
@@ -44,10 +43,12 @@ export function errorHandler(values: IErrors) {
   } else {
     res.date = '';
   }
+
   if (!values.files || !values.files[0] || !values.files[0].name) {
     res.photo = 'photo';
   } else {
     res.photo = '';
   }
+
   return res;
 }

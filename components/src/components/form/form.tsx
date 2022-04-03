@@ -3,23 +3,26 @@ import React, { Component, RefObject } from 'react';
 import './form.css';
 import './switcher.css';
 import { errorHandler } from './errorDefinder';
+import { ObjectType } from 'typescript';
 
 interface IErrorState {
   nameInput?: string | undefined;
   select?: string;
   checkbox?: string | boolean;
-  switch?: string;
+  switch?: string | boolean;
   date?: string;
   photo?: string;
-  errName?: string;
 }
 export interface IErrors extends Partial<IErrorState> {
-  files: FileList | null | undefined;
+  files: FileList | null | undefined | '';
 }
 
-interface IFormProp {}
+interface IFormProp {
+  formOnSubmit: (obj: IErrors) => void;
+}
 interface IFormState {
   errors: IErrorState;
+  submintDisabled: boolean;
 }
 
 export default class Form extends Component<IFormProp, IFormState> {
@@ -40,9 +43,10 @@ export default class Form extends Component<IFormProp, IFormState> {
         switch: '',
         date: '',
         photo: '',
-        errName: '',
       },
+      submintDisabled: false,
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameInput = React.createRef<HTMLInputElement>();
     this.select = React.createRef();
@@ -54,52 +58,51 @@ export default class Form extends Component<IFormProp, IFormState> {
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const stateObj = {
+    const errObj = {
       nameInput: this.nameInput.current?.value,
       select: this.select.current?.value,
       checkbox: this.checkbox.current?.checked,
-      switch: this.switch.current?.value,
+      switch: this.switch.current?.checked,
       date: this.date.current?.value,
       files: this.photo?.current?.files,
     };
-    const errors = errorHandler(stateObj);
+    const errors = errorHandler(errObj);
     this.setState({
       errors,
     });
-    console.log(this.state);
+    let errCount = 0;
+    for (const err in errors) {
+      if (errors[err as keyof IErrors] !== '') {
+        errCount++;
+      }
+    }
+    if (errCount === 0) {
+      this.props.formOnSubmit(errObj);
+      errCount = 0;
+    } else {
+    }
   }
+
   render() {
-    const nameErrMessage = this.state.errors.nameInput ? (
-      <p className="error-message">
-        *the name must have at least 2 and no more than 15 characters{' '}
-      </p>
-    ) : null;
+    const { nameInput, select, checkbox, date, photo } = this.state.errors;
+    const createErrMesssage = (err: string | boolean | undefined, message: string) => {
+      return err ? <p className="error-message">{message}</p> : null;
+    };
+    // const defineSbtBtn = () => {
+    //   if (!this.nameInput.current?.value || this.checkbox.current?.checked) {
+    //     return <input disabled type="submit" value="Отправить" />;
+    //   } else return <input type="submit" value="Отправить" />;
+    // };
 
-    const selectErrMessage = this.state.errors.select ? (
-      <p className="error-message">*no country has been selected</p>
-    ) : null;
-
-    const checkboxErrMessage = this.state.errors.checkbox ? (
-      <p className="error-message">*must be checked</p>
-    ) : null;
-
-    // const switcherErrMessage = this.state.errors.switch ? (
-    //   <p className="error-message">*invalid value</p>
-    // ) : null;
-
-    const dateErrMessage = this.state.errors.date ? (
-      <p className="error-message">*you mast be over 18 years old</p>
-    ) : null;
-
-    const photoErrMessage = this.state.errors.photo ? (
-      <p className="error-message">*no photo</p>
-    ) : null;
     return (
       <form onSubmit={this.handleSubmit} className="form">
         <label className="form-element">
           <span>Name: </span>
           <input type="text" ref={this.nameInput} />
-          {nameErrMessage}
+          {createErrMesssage(
+            nameInput,
+            '*the name must have at least 2 and no more than 15 characters'
+          )}
         </label>
 
         <label className="form-element">
@@ -110,7 +113,7 @@ export default class Form extends Component<IFormProp, IFormState> {
             <option value="Russia">Russia</option>
             <option value="Ukraine">Ukraine</option>
           </select>
-          {selectErrMessage}
+          {createErrMesssage(select, '*no country has been selected')}
         </label>
 
         <div className="form-element">
@@ -118,26 +121,25 @@ export default class Form extends Component<IFormProp, IFormState> {
           <label className="switch">
             <input type="checkbox" ref={this.switch} />
             <span className="slider round"></span>
-            {/* {switcherErrMessage} */}
           </label>
         </div>
 
         <label className="form-element">
           Birth date:
           <input type="date" id="start" name="trip-start" ref={this.date}></input>
-          {dateErrMessage}
+          {createErrMesssage(date, '*you mast be over 18 years old')}
         </label>
 
         <label>
           Upload photo:
           <input type="file" ref={this.photo} />
-          {photoErrMessage}
+          {createErrMesssage(photo, '*add photo')}
         </label>
 
         <label className="form-element">
           <span>Do you agree to data processing? </span>
           <input type="checkbox" ref={this.checkbox} />
-          {checkboxErrMessage}
+          {createErrMesssage(checkbox, '*must be checked')}
         </label>
 
         <input type="submit" value="Отправить" />
