@@ -2,13 +2,13 @@ import React, { Component, RefObject } from 'react';
 
 import './form.css';
 import './switcher.css';
-import { errorDataChecking, errorHandler } from './errorDefinder';
+import { errorDataChecking, errorHandler } from './errorHandler';
 
 interface IErrorState {
   nameInput?: string | undefined;
   select?: string;
   checkbox?: string | boolean;
-  switch?: string | boolean;
+  gender?: string | boolean;
   date?: string;
   photo?: string;
 }
@@ -28,7 +28,7 @@ export default class Form extends Component<IFormProp, IFormState> {
   nameInput: RefObject<HTMLInputElement>;
   select: RefObject<HTMLSelectElement>;
   checkbox: RefObject<HTMLInputElement>;
-  switch: RefObject<HTMLInputElement>;
+  gender: RefObject<HTMLInputElement>;
   date: RefObject<HTMLInputElement>;
   photo: RefObject<HTMLInputElement>;
 
@@ -39,7 +39,7 @@ export default class Form extends Component<IFormProp, IFormState> {
         nameInput: '',
         select: '',
         checkbox: '',
-        switch: '',
+        gender: '',
         date: '',
         photo: '',
       },
@@ -50,7 +50,7 @@ export default class Form extends Component<IFormProp, IFormState> {
     this.nameInput = React.createRef<HTMLInputElement>();
     this.select = React.createRef();
     this.checkbox = React.createRef();
-    this.switch = React.createRef();
+    this.gender = React.createRef();
     this.date = React.createRef();
     this.photo = React.createRef();
   }
@@ -65,7 +65,7 @@ export default class Form extends Component<IFormProp, IFormState> {
       nameInput: this.nameInput.current?.value,
       select: this.select.current?.value,
       checkbox: this.checkbox.current?.checked,
-      switch: this.switch.current?.checked,
+      switch: this.gender.current?.checked,
       date: this.date.current?.value,
       files: this.photo?.current?.files,
     };
@@ -76,9 +76,9 @@ export default class Form extends Component<IFormProp, IFormState> {
     });
 
     const errCount = errorDataChecking(errors);
-
+    const { checkbox, ...dataFormCard } = dataObj;
     if (errCount === 0) {
-      this.props.formOnSubmit(dataObj);
+      this.props.formOnSubmit(dataFormCard);
     } else this.setState({ submintDisabled: true });
   }
 
@@ -121,7 +121,7 @@ export default class Form extends Component<IFormProp, IFormState> {
         <div className="form-element">
           <p className="switch-text">Сhoose youre gender: </p>
           <label className="switch">
-            <input type="checkbox" ref={this.switch} />
+            <input type="checkbox" ref={this.gender} />
             <span className="slider round"></span>
           </label>
         </div>
