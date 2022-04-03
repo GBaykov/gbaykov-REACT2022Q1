@@ -2,11 +2,11 @@ import React from 'react';
 import { IErrors } from './form';
 
 export function validateDate(value: string | undefined | Date) {
-  let date: Date | number | string;
+  let date: Date;
   if (value !== undefined) {
     date = new Date(value);
     const now = new Date();
-    return now.getFullYear() - date.getFullYear();
+    return now.getFullYear() - +date.getFullYear() >= 18;
   }
 }
 
@@ -40,7 +40,6 @@ export function errorHandler(values: IErrors) {
   }
 
   if (!values.date || !validateDate(values.date)) {
-    // console.log(validateDate);
     res.date = 'date';
   } else {
     res.date = '';
