@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Form from '../components/form';
-import { IErrors } from '../components/form/form';
 import FormCards from '../components/formCards';
 import './main.css';
 
@@ -24,9 +23,10 @@ export default class FormPage extends Component<IFormPageProp, IFormPageState> {
     this.state = { formCards: null };
   }
   formOnSubmit = (obj: ICardForm) => {
-    const formCards: ICardForm[] = [];
+    const oldFormCards = this.state.formCards;
     const formCard = { gender: obj.gender ? 'Male' : 'Female', ...obj, id: this.maxId++ };
-    formCards.push(formCard);
+    const formCards = oldFormCards !== null ? [...oldFormCards, formCard] : [formCard];
+    //formCards.push(formCard);
     this.setState({
       formCards,
     });
