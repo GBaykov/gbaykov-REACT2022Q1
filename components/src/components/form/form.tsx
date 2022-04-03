@@ -47,12 +47,33 @@ export default class Form extends Component<IFormProp, IFormState> {
     };
     this.onFormChange = this.onFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearForm = this.clearForm.bind(this);
     this.nameInput = React.createRef<HTMLInputElement>();
     this.select = React.createRef();
     this.checkbox = React.createRef();
     this.gender = React.createRef();
     this.date = React.createRef();
     this.photo = React.createRef();
+  }
+  clearForm() {
+    if (this.nameInput.current) {
+      this.nameInput.current.value = '';
+    }
+    if (this.date.current) {
+      this.date.current.value = '';
+    }
+    if (this.select.current) {
+      this.select.current.value = '';
+    }
+    if (this.checkbox.current) {
+      this.checkbox.current.checked = false;
+    }
+    if (this.gender.current) {
+      this.gender.current.checked = false;
+    }
+    if (this.photo.current) {
+      this.photo.current.files = null;
+    }
   }
   onFormChange(event: React.FormEvent) {
     event.preventDefault();
@@ -79,6 +100,7 @@ export default class Form extends Component<IFormProp, IFormState> {
     const { checkbox, ...dataFormCard } = dataObj;
     if (errCount === 0) {
       this.props.formOnSubmit(dataFormCard);
+      this.clearForm();
     } else this.setState({ submintDisabled: true });
   }
 
