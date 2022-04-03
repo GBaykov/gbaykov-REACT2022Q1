@@ -9,13 +9,6 @@ export function validateDate(value: string | undefined | Date) {
   }
 }
 
-export function inputErrHandler(value: string | undefined) {
-  if (!value || value.length < 2 || value.length > 15) {
-    return 'nameinput';
-  } else {
-    return '';
-  }
-}
 export function errorHandler(values: IErrors) {
   const res: IErrors = {
     files: '',
@@ -51,4 +44,14 @@ export function errorHandler(values: IErrors) {
   }
 
   return res;
+}
+
+export function errorDataChecking(errors: IErrors) {
+  let errCount = 0;
+  for (const err in errors) {
+    if (errors[err as keyof IErrors] !== '') {
+      errCount++;
+    }
+  }
+  return errCount;
 }

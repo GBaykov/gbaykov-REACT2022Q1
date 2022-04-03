@@ -2,8 +2,7 @@ import React, { Component, RefObject } from 'react';
 
 import './form.css';
 import './switcher.css';
-import { errorHandler } from './errorDefinder';
-import { ObjectType } from 'typescript';
+import { errorDataChecking, errorHandler } from './errorDefinder';
 
 interface IErrorState {
   nameInput?: string | undefined;
@@ -14,7 +13,7 @@ interface IErrorState {
   photo?: string;
 }
 export interface IErrors extends Partial<IErrorState> {
-  files: FileList | null | undefined | '';
+  files?: FileList | null | undefined | '';
 }
 
 interface IFormProp {
@@ -44,9 +43,9 @@ export default class Form extends Component<IFormProp, IFormState> {
         date: '',
         photo: '',
       },
-      submintDisabled: false,
+      submintDisabled: true,
     };
-
+    this.onFormChange = this.onFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameInput = React.createRef<HTMLInputElement>();
     this.select = React.createRef();
@@ -55,10 +54,14 @@ export default class Form extends Component<IFormProp, IFormState> {
     this.date = React.createRef();
     this.photo = React.createRef();
   }
+  onFormChange(event: React.FormEvent) {
+    event.preventDefault();
+    this.setState({ submintDisabled: false });
+  }
 
   handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const errObj = {
+    const dataObj = {
       nameInput: this.nameInput.current?.value,
       select: this.select.current?.value,
       checkbox: this.checkbox.current?.checked,
@@ -66,21 +69,14 @@ export default class Form extends Component<IFormProp, IFormState> {
       date: this.date.current?.value,
       files: this.photo?.current?.files,
     };
-    const errors = errorHandler(errObj);
+    const errors = errorHandler(dataObj);
     this.setState({
       errors,
     });
-    let errCount = 0;
-    for (const err in errors) {
-      if (errors[err as keyof IErrors] !== '') {
-        errCount++;
-      }
-    }
+    const errCount = errorDataChecking(errors);
     if (errCount === 0) {
-      this.props.formOnSubmit(errObj);
-      errCount = 0;
-    } else {
-    }
+      this.props.formOnSubmit(dataObj);
+    } else this.setState({ submintDisabled: true });
   }
 
   render() {
@@ -88,14 +84,17 @@ export default class Form extends Component<IFormProp, IFormState> {
     const createErrMesssage = (err: string | boolean | undefined, message: string) => {
       return err ? <p className="error-message">{message}</p> : null;
     };
-    // const defineSbtBtn = () => {
-    //   if (!this.nameInput.current?.value || this.checkbox.current?.checked) {
-    //     return <input disabled type="submit" value="Отправить" />;
-    //   } else return <input type="submit" value="Отправить" />;
-    // };
+
+    const defineSbtBtn = () => {
+      if (this.state.submintDisabled) {
+        return <input disabled type="submit" value="Отправить" />;
+      } else {
+        return <input type="submit" value="Отправить" />;
+      }
+    };
 
     return (
-      <form onSubmit={this.handleSubmit} className="form">
+      <form onSubmit={this.handleSubmit} className="form" onChange={this.onFormChange}>
         <label className="form-element">
           <span>Name: </span>
           <input type="text" ref={this.nameInput} />
@@ -142,7 +141,8 @@ export default class Form extends Component<IFormProp, IFormState> {
           {createErrMesssage(checkbox, '*must be checked')}
         </label>
 
-        <input type="submit" value="Отправить" />
+        {/* <input type="submit" value="Отправить" /> */}
+        {defineSbtBtn()}
       </form>
     );
   }
