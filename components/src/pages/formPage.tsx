@@ -8,7 +8,7 @@ interface IFormPageState {
   nameInput?: string | undefined;
   select?: string;
   checkbox?: string | boolean;
-  switch?: string | boolean | undefined;
+  gender?: string | boolean | undefined;
   date?: string;
   files?: FileList | null | undefined | '';
 }
@@ -21,10 +21,11 @@ export default class FormPage extends Component<IFormPageProp, IFormPageState> {
   formOnSubmit = (obj: IErrors) => {
     const { nameInput, select, date, files } = obj;
     console.log('object in formPage', obj);
+    const gender = obj.switch ? 'Male' : 'Female';
     this.setState({
       nameInput,
       select,
-      switch: obj.switch,
+      gender,
       date,
       files,
     });
@@ -35,7 +36,7 @@ export default class FormPage extends Component<IFormPageProp, IFormPageState> {
         <p>{this.state.nameInput}</p>
         <p>{this.state.date}</p>
         <p>{this.state.select}</p>
-        <p>{this.state.switch}</p>
+        <p>{this.state.gender}</p>
         <Form formOnSubmit={this.formOnSubmit} />
       </main>
     );

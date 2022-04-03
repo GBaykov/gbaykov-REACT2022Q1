@@ -70,10 +70,13 @@ export default class Form extends Component<IFormProp, IFormState> {
       files: this.photo?.current?.files,
     };
     const errors = errorHandler(dataObj);
+
     this.setState({
       errors,
     });
+
     const errCount = errorDataChecking(errors);
+
     if (errCount === 0) {
       this.props.formOnSubmit(dataObj);
     } else this.setState({ submintDisabled: true });
@@ -141,7 +144,6 @@ export default class Form extends Component<IFormProp, IFormState> {
           {createErrMesssage(checkbox, '*must be checked')}
         </label>
 
-        {/* <input type="submit" value="Отправить" /> */}
         {defineSbtBtn()}
       </form>
     );
