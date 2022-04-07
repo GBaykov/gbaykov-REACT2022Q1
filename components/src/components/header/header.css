@@ -1,0 +1,9 @@
+.header{
+    background-color: rgb(247, 252, 232);
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.headder-link{
+    margin: 5px 10px;
+}
