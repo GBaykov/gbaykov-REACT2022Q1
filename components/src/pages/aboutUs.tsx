@@ -5,7 +5,7 @@ export default class AboutUsPage extends Component {
   render() {
     return (
       <main className="main">
-        <p className="message">ABOUT US</p>
+        <h1 className="message">ABOUT US</h1>
       </main>
     );
   }

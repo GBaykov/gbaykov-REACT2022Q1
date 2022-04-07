@@ -5,7 +5,7 @@ export default class ErrorPage extends Component {
   render() {
     return (
       <main className="main">
-        <p className="message">PAGE NOT FOUND</p>
+        <h1 className="message">PAGE NOT FOUND</h1>
       </main>
     );
   }
