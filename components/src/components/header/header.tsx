@@ -19,8 +19,8 @@ export default class Header extends Component {
 
   createItem(label: string | undefined, href: string | undefined) {
     return {
-      label: label,
-      href: href,
+      label,
+      href,
       id: this.maxId++,
     };
   }

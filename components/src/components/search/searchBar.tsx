@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
+import { SearchBarProps, SearchBarState } from '../../types/types';
 import './search.css';
 
-interface InputState {
-  inputValue: null | string;
-}
-interface InputProps {}
-
-export default class SearchBar extends Component<InputProps, InputState> {
+export default class SearchBar extends Component<SearchBarProps, SearchBarState> {
   state = {
     inputValue: '',
   };
-  constructor(props: InputProps) {
+  constructor(props: SearchBarProps) {
     super(props);
 
     this.componentCleanup = this.componentCleanup.bind(this);
@@ -40,6 +36,7 @@ export default class SearchBar extends Component<InputProps, InputState> {
 
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    this.props.onSearchSubmit(this.state.inputValue);
   };
 
   render() {

@@ -4,12 +4,17 @@ import SearchBar from '../components/search';
 import './main.css';
 
 export default class MainPage extends Component {
+  state = { inputValue: '' };
+  onSearchSubmit = (inputValue: string) => {
+    this.setState({ inputValue });
+    console.log(inputValue);
+  };
   render() {
     return (
       <main className="main">
         <h1>Main Page</h1>
-        <SearchBar />
-        <Cards />
+        <SearchBar onSearchSubmit={this.onSearchSubmit} />
+        <Cards inputValue={this.state.inputValue} />
       </main>
     );
   }
