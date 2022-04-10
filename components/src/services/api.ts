@@ -3,7 +3,7 @@ import { Character, Info } from '../types/api-interfacies';
 export default class Api {
   URL = `https://rickandmortyapi.com/api/character/?`; //name=${name}&status=${status}&gender=${gender}&species=${species}&type=${type}
 
-  getAllCharacters = async (page = 1) => {
+  getAllCharacters = async (page = '') => {
     try {
       const res = await fetch(`${this.URL}page=${page}`);
       const body: Info<Character[]> = await res.json();
@@ -15,9 +15,9 @@ export default class Api {
   };
 
   getCharacter = async (
-    name: string,
+    name: string | null,
     status = '',
-    page = 1,
+    page = '',
     gender = '',
     species = '',
     type = ''
@@ -29,14 +29,12 @@ export default class Api {
       const character: Info<Character[]> = await res.json();
       return this.characterToResponse(character);
     } catch (err) {
-      console.log(err);
       throw new Error();
     }
   };
 
   characterToResponse(chars: Info<Character[]>) {
     if (!chars || !chars.results) throw new Error();
-    console.log(chars.results);
     return chars.results;
   }
 }

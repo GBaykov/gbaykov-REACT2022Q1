@@ -5,7 +5,7 @@ import './main.css';
 
 export default class MainPage extends Component {
   state = { inputValue: '' };
-  onSearchSubmit = (inputValue: string) => {
+  onSearchSubmit = (inputValue: null | string) => {
     this.setState({ inputValue });
     console.log(inputValue);
   };
