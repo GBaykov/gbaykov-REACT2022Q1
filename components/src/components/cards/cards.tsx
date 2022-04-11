@@ -30,21 +30,13 @@ export default class Cards extends Component<ICardsProps, ICardsState> {
     if (characters == null || !characters) {
       return null;
     }
-    const cardsList = characters.map((character: Character | null) => {
-      if (character == null) return null;
-      console.log(character);
-      return (
-        <section className="card" key={character.id}>
-          <img src={character.image} alt="image of character" />
-          <p>{`name: ${character.name}`}</p>
-          <p>{`gender: ${character.gender}`}</p>
-          <p>{`status: ${character.status}`}</p>
-          <p>{`origin: ${character.origin}`}</p>
-        </section>
-      );
-    });
-
-    if (this.state.characters == null) return null;
-    return <section className="cards-field">{cardsList}</section>;
+    return (
+      <section className="cards-field">
+        {characters.map((character: Character | null) => {
+          if (character == null) return null;
+          return <Card character={character} key={character.id} />;
+        })}
+      </section>
+    );
   }
 }
