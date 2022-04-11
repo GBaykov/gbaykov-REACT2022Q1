@@ -7,7 +7,6 @@ export default class MainPage extends Component {
   state = { inputValue: '' };
   onSearchSubmit = (inputValue: null | string) => {
     this.setState({ inputValue });
-    console.log(inputValue);
   };
   render() {
     return (

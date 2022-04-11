@@ -4,32 +4,38 @@ import Card from '../card';
 import './cards.css';
 import Api from '../../services/api';
 import { Character } from '../../types/api-interfacies';
+import Spinner from '../spinner';
 
 export default class Cards extends Component<ICardsProps, ICardsState> {
   api = new Api();
   state = {
     inputValue: '',
     characters: [],
+    isLoading: false,
   };
 
   componentDidUpdate(prevProps: ICardsProps) {
     if (this.props.inputValue !== prevProps.inputValue) {
+      this.setState({ inputValue: this.props.inputValue });
       this.addCharacter();
     }
+    // this.setState({ isLoading: false });
   }
 
-  addCharacter = () => {
-    this.setState({ inputValue: this.props.inputValue });
-    return this.api.getCharacter(this.props.inputValue).then((characters) => {
-      this.setState({ characters });
-    });
+  addCharacter = async () => {
+    await this.setState({ isLoading: true });
+    const characters = await this.api.getCharacter(this.props.inputValue);
+    this.setState({ characters });
+    this.setState({ isLoading: false });
   };
 
   render() {
-    const { characters } = this.state;
+    const { characters, isLoading } = this.state;
     if (characters == null || !characters) {
       return null;
     }
+    if (isLoading) return <Spinner />;
+
     return (
       <section className="cards-field">
         {characters.map((character: Character | null) => {

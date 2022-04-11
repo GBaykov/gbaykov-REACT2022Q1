@@ -9,7 +9,7 @@ export interface SearchBarProps {
 
 export interface ICardsState {
   inputValue: null | string;
-
+  isLoading: boolean;
   characters: null | Character[];
 }
 export interface ICardsProps {
