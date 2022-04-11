@@ -9,8 +9,17 @@ export interface SearchBarProps {
 
 export interface ICardsState {
   inputValue: null | string;
+
   characters: null | Character[];
 }
 export interface ICardsProps {
   inputValue: null | string;
+}
+
+export interface ICardState {
+  // inputValue: null | string;
+  // characters: null | Character[];
+}
+export interface ICardProps {
+  character: null | Character;
 }

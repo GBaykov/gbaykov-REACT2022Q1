@@ -6,34 +6,45 @@ import Api from '../../services/api';
 import { Character } from '../../types/api-interfacies';
 
 export default class Cards extends Component<ICardsProps, ICardsState> {
+  api = new Api();
   state = {
     inputValue: '',
-    characters: null,
+    characters: [],
   };
-  api = new Api();
+
   componentDidUpdate(prevProps: ICardsProps) {
-    // this.setState({ inputValue: this.props.inputValue });
     if (this.props.inputValue !== prevProps.inputValue) {
-      this.setState({ inputValue: this.props.inputValue });
       this.addCharacter();
     }
-    // this.setState({ inputValue: this.props.inputValue });
   }
+
   addCharacter = () => {
-    this.api.getCharacter(this.props.inputValue).then((characters) => {
-      console.log(characters);
+    this.setState({ inputValue: this.props.inputValue });
+    return this.api.getCharacter(this.props.inputValue).then((characters) => {
       this.setState({ characters });
     });
   };
 
   render() {
-    return (
-      <section className="cards-field">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </section>
-    );
+    const { characters } = this.state;
+    if (characters == null || !characters) {
+      return null;
+    }
+    const cardsList = characters.map((character: Character | null) => {
+      if (character == null) return null;
+      console.log(character);
+      return (
+        <section className="card" key={character.id}>
+          <img src={character.image} alt="image of character" />
+          <p>{`name: ${character.name}`}</p>
+          <p>{`gender: ${character.gender}`}</p>
+          <p>{`status: ${character.status}`}</p>
+          <p>{`origin: ${character.origin}`}</p>
+        </section>
+      );
+    });
+
+    if (this.state.characters == null) return null;
+    return <section className="cards-field">{cardsList}</section>;
   }
 }
