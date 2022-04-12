@@ -10,6 +10,7 @@ import { saveToStorage } from './storage';
 import userEvent from '@testing-library/user-event';
 import Header from './components/header';
 import { BrowserRouter } from 'react-router-dom';
+import FormPage from './pages/formPage';
 
 describe('Card', () => {
   it('returns all fields of Card component', () => {
@@ -82,7 +83,6 @@ describe('Search', () => {
     render(<SearchBar />);
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Search area')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('')).toBeInTheDocument();
   });
   it('returns focus', () => {
     render(<SearchBar />);
@@ -125,5 +125,47 @@ describe('Pages', () => {
     expect(screen.getByText(/Main Page/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+});
+describe('Form Page', () => {
+  it('returns inputs and text of the form', () => {
+    render(<FormPage />);
+    expect(screen.getByRole('main')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByRole('country')).toBeInTheDocument();
+    expect(screen.getByText(/Name:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Сhoose youre contry:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Сhoose youre gender:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Birth date:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Upload photo:/i)).toBeInTheDocument();
+    expect(screen.getByText(/Do you agree to data processing/i)).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  test('check disabling of submit button', () => {
+    render(<FormPage />);
+    expect(screen.getByRole('main')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button')).toBeDisabled();
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'React' },
+    });
+    expect(screen.getByRole('button')).not.toBeDisabled();
+  });
+
+  test('get error messages under the form`s inputs', () => {
+    render(<FormPage />);
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'r' },
+    });
+    userEvent.click(screen.getByRole('button'));
+    expect(
+      screen.getByText(/the name must have at least 2 and no more than 15 characters/i)
+    ).toBeInTheDocument();
+    expect(screen.getByText(/no country has been selected/i)).toBeInTheDocument();
+    expect(screen.getByText(/you mast be over 18 years old/i)).toBeInTheDocument();
+    expect(screen.getByText(/must be checked/i)).toBeInTheDocument();
+    expect(screen.getByText(/add photo/i)).toBeInTheDocument();
   });
 });
