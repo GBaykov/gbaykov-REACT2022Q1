@@ -10,7 +10,8 @@ export interface SearchBarProps {
 export interface ICardsState {
   inputValue: null | string;
   isLoading: boolean;
-  characters: null | Character[];
+  characters: null | Character[] | undefined;
+  isError: boolean;
 }
 export interface ICardsProps {
   inputValue: null | string;

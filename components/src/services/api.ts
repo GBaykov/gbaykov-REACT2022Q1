@@ -26,10 +26,14 @@ export default class Api {
       const res = await fetch(
         `${this.URL}name=${name}&status=${status}&page=${page}&gender=${gender}&species=${species}&type=${type}`
       );
-      const character: Info<Character[]> = await res.json();
-      return this.characterToResponse(character);
+      if (res.ok) {
+        const character: Info<Character[]> = await res.json();
+        return this.characterToResponse(character);
+      } else {
+        throw new Error(`Ошибка HTTP: ${res.status}`);
+      }
     } catch (err) {
-      throw new Error();
+      throw new Error('Something went wrong while getting character');
     }
   };
 
