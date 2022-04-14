@@ -15,6 +15,7 @@ export interface ICardsState {
 }
 export interface ICardsProps {
   inputValue: null | string;
+  onCardClick: (character: Character) => void;
 }
 
 export interface ICardState {
@@ -23,4 +24,11 @@ export interface ICardState {
 }
 export interface ICardProps {
   character: null | Character;
+  onCardClick: (character: Character) => void;
 }
+
+export interface IMainPageState {
+  inputValue: null | string;
+  character: null | Character;
+}
+export interface IMainPageProps {}
