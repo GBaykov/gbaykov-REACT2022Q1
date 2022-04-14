@@ -2,7 +2,7 @@
     background-color: rgb(247, 252, 232);
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     justify-content: center;
 }
 .headder-link{

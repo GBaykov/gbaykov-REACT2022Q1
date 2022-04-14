@@ -12,7 +12,6 @@ export default class MainPage extends Component<IMainPageProps, IMainPageState> 
     this.setState({ inputValue });
   };
   onCardClick = (character: Character) => {
-    console.log(character);
     this.setState({ character });
   };
   render() {
@@ -21,7 +20,7 @@ export default class MainPage extends Component<IMainPageProps, IMainPageState> 
         <h1>Main Page</h1>
         <SearchBar onSearchSubmit={this.onSearchSubmit} />
         <Cards inputValue={this.state.inputValue} onCardClick={this.onCardClick} />
-        {/* <Modal /> */}
+        <Modal character={this.state.character} />
       </main>
     );
   }

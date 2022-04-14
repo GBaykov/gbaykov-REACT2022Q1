@@ -32,3 +32,7 @@ export interface IMainPageState {
   character: null | Character;
 }
 export interface IMainPageProps {}
+
+export interface IModalProps {
+  character: null | Character;
+}
