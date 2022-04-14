@@ -11,12 +11,20 @@ export default class FormCards extends Component<IFormCardsProps, IFormCardsStat
     const cards = this.props.formCards?.map((formCard) => {
       if (formCard.files) {
         return (
-          <div key={formCard.id}>
-            <p>{formCard.nameInput}</p>
-            <p>{formCard.date}</p>
-            <p>{formCard.gender}</p>
-            <p>{formCard.select}</p>
-            <img src={URL.createObjectURL(formCard.files[0])}></img>
+          <div className="form-card" key={formCard.id}>
+            <p className="form-card_text">
+              <b>name:</b> {formCard.nameInput}
+            </p>
+            <p className="form-card_text">
+              <b>birth date</b> {formCard.date}
+            </p>
+            <p className="form-card_text">
+              <b>gender:</b> {formCard.gender}
+            </p>
+            <p className="form-card_text">
+              <b>country:</b> {formCard.select}
+            </p>
+            <img className="form-card_img" src={URL.createObjectURL(formCard.files[0])} />
           </div>
         );
       }

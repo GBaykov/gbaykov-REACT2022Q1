@@ -131,9 +131,11 @@ export default class Form extends Component<IFormProp, IFormState> {
 
         <label className="form-element">
           <span>Сhoose youre contry: </span>
-          <select ref={this.select}>
+          <select role="country" ref={this.select}>
             <option value="null"></option>
-            <option value="Belarus">Belarus</option>
+            <option role="Belarus-country" value="Belarus">
+              Belarus
+            </option>
             <option value="Russia">Russia</option>
             <option value="Ukraine">Ukraine</option>
           </select>
@@ -150,19 +152,19 @@ export default class Form extends Component<IFormProp, IFormState> {
 
         <label className="form-element">
           Birth date:
-          <input type="date" id="start" name="trip-start" ref={this.date}></input>
+          <input role="date-input" type="date" id="start" name="trip-start" ref={this.date}></input>
           {createErrMesssage(date, '*you mast be over 18 years old')}
         </label>
 
         <label>
           Upload photo:
-          <input type="file" ref={this.photo} />
+          <input role="upload-file" type="file" ref={this.photo} />
           {createErrMesssage(photo, '*add photo')}
         </label>
 
         <label className="form-element">
           <span>Do you agree to data processing? </span>
-          <input type="checkbox" ref={this.checkbox} />
+          <input role="data-processing" type="checkbox" ref={this.checkbox} />
           {createErrMesssage(checkbox, '*must be checked')}
         </label>
 
