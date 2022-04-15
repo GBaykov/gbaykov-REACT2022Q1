@@ -40,7 +40,7 @@ export default class Cards extends Component<ICardsProps, ICardsState> {
 
   render() {
     const { characters, isLoading, isError } = this.state;
-    const { onCardClick } = this.props;
+    const { onCardClick, closeOpenModal } = this.props;
     if (characters == null || !characters) {
       return null;
     }
@@ -50,7 +50,14 @@ export default class Cards extends Component<ICardsProps, ICardsState> {
       <section className="cards-field">
         {characters.map((character: Character | null) => {
           if (character == null) return null;
-          return <Card character={character} key={character.id} onCardClick={onCardClick} />;
+          return (
+            <Card
+              character={character}
+              key={character.id}
+              onCardClick={onCardClick}
+              closeOpenModal={closeOpenModal}
+            />
+          );
         })}
       </section>
     );

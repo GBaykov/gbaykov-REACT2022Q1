@@ -16,8 +16,6 @@
     width: 45%;
     height: 80%;
     min-width: 15%;
-    /* min-height: 25%; */
-    /* line-height: 200px; */
     position: fixed;
     top: 30%; 
     left: 40%;
@@ -30,7 +28,6 @@
   
     }
     .modal-content{
-        /* position: relative; */
         display:flex;
         flex-wrap: wrap ;
         flex-direction: column;
@@ -40,8 +37,6 @@
 
     }
     .modal-item{
-        /* position: relative; */
-        /* position: absolute; */
         margin: 0 auto;
         max-height:30px;
     }
@@ -58,6 +53,5 @@
         position: relative;
     }
     .card-img{
-        /* height: 35%; */
         width: 65%;
     }

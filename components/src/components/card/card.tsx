@@ -4,7 +4,8 @@ import { ICardProps, ICardState } from '../../types/types';
 
 export default class Сard extends Component<ICardProps, ICardState> {
   onCardClick = () => {
-    const { character } = this.props;
+    const { character, closeOpenModal } = this.props;
+    closeOpenModal(true);
     if (character) this.props.onCardClick(character);
   };
   render() {
