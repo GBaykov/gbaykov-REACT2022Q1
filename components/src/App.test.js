@@ -11,6 +11,7 @@ import userEvent from '@testing-library/user-event';
 import Header from './components/header';
 import { BrowserRouter } from 'react-router-dom';
 import FormPage from './pages/formPage';
+import Api from './services/api';
 
 describe('Card', () => {
   it('returns all fields of Card component', () => {
@@ -169,3 +170,46 @@ describe('Form Page', () => {
     expect(screen.getByText(/add photo/i)).toBeInTheDocument();
   });
 });
+// const api = new Api();
+// const getCharacter = api.getCharacter('test1');
+// jest.mock(getCharacter, () => {
+//   const character = [
+//     {
+//       status: 'test1',
+//       species: 'test1',
+//       type: 'test1',
+//       gender: 'test1',
+//       origin: {
+//         name: 'test1',
+//         url: 'test1',
+//       },
+//       location: {
+//         name: 'test1',
+//         url: 'test1',
+//       },
+//       image: 'test1',
+//       episode: ['test1', 'test1'],
+//     },
+//     {
+//       status: 'test2',
+//       species: 'test2',
+//       type: 'test2',
+//       gender: 'test2',
+//       origin: {
+//         name: 'test2',
+//         url: 'test2',
+//       },
+//       location: {
+//         name: 'test2',
+//         url: 'test2',
+//       },
+//       image: 'test2',
+//       episode: ['test2', 'test2'],
+//     },
+//   ];
+
+//   return {
+//     getCharacter: jest.fn(() => Promise.resolve(character)),
+//   };
+// });
+// test('mock api ', () => {});

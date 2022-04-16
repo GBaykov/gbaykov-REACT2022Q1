@@ -25,7 +25,9 @@
     "@typescript-eslint/parser": "^5.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react": "^1.1.7",
-    "eslint-plugin-prettier": "^4.0.0"
+    "eslint-plugin-prettier": "^4.0.0",
+    "msw": "^0.39.2",
+    "nock": "^13.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
