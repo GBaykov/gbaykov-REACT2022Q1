@@ -22,7 +22,7 @@ export default class FormPage extends Component<IFormPageProp, IFormPageState> {
   render() {
     return (
       <main className="main">
-        <Form formOnSubmit={this.formOnSubmit} />
+        <Form />
         <FormCards formCards={this.state.formCards} />
       </main>
     );
