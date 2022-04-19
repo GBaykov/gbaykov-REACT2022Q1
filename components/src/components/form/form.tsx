@@ -11,7 +11,7 @@ import { IFormProp, IFormState } from '../../types/types';
 //   other = 'other',
 // }
 
-interface IFormInput {
+interface IFormInputs {
   nameInput: string;
   select: string;
   date: Date;
@@ -21,26 +21,37 @@ interface IFormInput {
 }
 
 export default function Form() {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm<IFormInputs>({ mode: 'onSubmit' });
+  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    reset();
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <label className="form-element">
         <span>Name: </span>
-        <input {...register('nameInput')} />
+        <input {...register('nameInput', { required: true, maxLength: 15, minLength: 2 })} />
+        <p className="error-message">
+          {errors.nameInput && '*the name must have at least 2 and no more than 15 characters'}
+        </p>
       </label>
 
       <label className="form-element">
         <span>Сhoose youre contry: </span>
-        <select role="country" {...register('select')}>
-          <option value="null"></option>
+        <select role="country" {...register('select', { required: true })}>
+          <option value=""></option>
           <option role="Belarus-country" value="Belarus">
             Belarus
           </option>
           <option value="Russia">Russia</option>
           <option value="Ukraine">Ukraine</option>
         </select>
+        <p className="error-message">{errors.select && '*no country has been selected'}</p>
       </label>
 
       <div className="form-element">
@@ -53,19 +64,30 @@ export default function Form() {
 
       <label className="form-element">
         Birth date:
-        <input role="date-input" type="date" id="start" {...register('date')}></input>
+        <input
+          role="date-input"
+          type="date"
+          id="start"
+          {...register('date', { required: true })}
+        ></input>
       </label>
 
       <label>
         Upload photo:
-        <input role="upload-file" type="file" {...register('photo')} />
+        <input role="upload-file" type="file" {...register('photo', { required: true })} />
+        <p className="error-message">{errors.photo && '*add photo'}</p>
       </label>
 
       <label className="form-element">
         <span>Do you agree to data processing? </span>
-        <input role="data-processing" type="checkbox" {...register('checkbox')} />
+        <input
+          role="data-processing"
+          type="checkbox"
+          {...register('checkbox', { required: true })}
+        />
+        <p className="error-message">{errors.checkbox && '*must be checked'}</p>
       </label>
-      <input type="submit" />
+      <input type="submit" disabled={!isValid} />
     </form>
   );
 }
