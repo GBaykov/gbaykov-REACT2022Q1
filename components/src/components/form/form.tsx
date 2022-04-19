@@ -3,26 +3,7 @@ import React, { Component, RefObject } from 'react';
 import './form.css';
 import './switcher.css';
 import { errorDataChecking, errorHandler } from './errorHandler';
-
-interface IErrorState {
-  nameInput?: string | undefined;
-  select?: string;
-  checkbox?: string | boolean;
-  gender?: string | boolean;
-  date?: string;
-  photo?: string;
-}
-export interface IErrors extends Partial<IErrorState> {
-  files?: FileList | null | undefined | '';
-}
-
-interface IFormProp {
-  formOnSubmit: (obj: IErrors) => void;
-}
-interface IFormState {
-  errors: IErrorState;
-  submintDisabled: boolean;
-}
+import { IFormProp, IFormState } from '../../types/types';
 
 export default class Form extends Component<IFormProp, IFormState> {
   nameInput: RefObject<HTMLInputElement>;

@@ -37,3 +37,41 @@ export interface IModalProps {
   character: null | Character;
   closeOpenModal: (isModal: boolean) => void;
 }
+
+interface IErrorState {
+  nameInput?: string;
+  select?: string;
+  checkbox?: string | boolean;
+  gender?: string | boolean;
+  date?: string;
+  photo?: string;
+}
+export interface IErrors extends Partial<IErrorState> {
+  files?: FileList | null | undefined | '';
+}
+
+export interface IFormProp {
+  formOnSubmit: (obj: IErrors) => void;
+}
+export interface IFormState {
+  errors: IErrorState;
+  submintDisabled: boolean;
+}
+
+export interface IFormPageProp {}
+export interface IFormPageState {
+  formCards: ICardForm[] | null;
+}
+export interface ICardForm {
+  nameInput?: string;
+  select?: string;
+  gender?: string | boolean;
+  date?: string;
+  files?: FileList | null | '';
+  id?: number;
+}
+
+export interface IFormCardsProps {
+  formCards: ICardForm[] | null;
+}
+export interface IFormCardsState {}

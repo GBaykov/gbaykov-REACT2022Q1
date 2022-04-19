@@ -2,7 +2,6 @@ import { Character, Info } from '../types/api-interfacies';
 
 export default class Api {
   URL = `https://rickandmortyapi.com/api/character/?`;
-  //name=${name}&status=${status}&gender=${gender}&species=${species}&type=${type}
 
   getCharacter = async (
     name: string | null,

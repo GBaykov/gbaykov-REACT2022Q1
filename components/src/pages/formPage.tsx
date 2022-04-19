@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
 import Form from '../components/form';
 import FormCards from '../components/formCards';
+import { ICardForm, IFormPageProp, IFormPageState } from '../types/types';
 import './main.css';
-
-export interface IFormPageProp {}
-export interface IFormPageState {
-  formCards: ICardForm[] | null;
-}
-export interface ICardForm {
-  nameInput?: string | undefined;
-  select?: string;
-  gender?: string | boolean | undefined;
-  date?: string;
-  files?: FileList | null | undefined | '';
-  id?: number;
-}
 
 export default class FormPage extends Component<IFormPageProp, IFormPageState> {
   maxId = 0;

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { ICardForm } from '../../pages/formPage';
+import { IFormCardsProps, IFormCardsState } from '../../types/types';
 import './formCards.css';
-interface IFormCardsProps {
-  formCards: ICardForm[] | null;
-}
-interface IFormCardsState {}
 
 export default class FormCards extends Component<IFormCardsProps, IFormCardsState> {
   render() {

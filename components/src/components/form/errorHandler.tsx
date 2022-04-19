@@ -1,4 +1,4 @@
-import { IErrors } from './form';
+import { IErrors } from '../../types/types';
 
 export function validateDate(value: string | undefined | Date) {
   let date: Date;
