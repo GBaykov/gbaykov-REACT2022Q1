@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './card.css';
-import { ICardProps, ICardState } from '../../types/types';
+import { ICardProps } from '../../types/types';
 
-export default class Сard extends Component<ICardProps, ICardState> {
-  onCardClick = () => {
-    const { character, closeOpenModal } = this.props;
+export default function Card(props: ICardProps): JSX.Element {
+  const { character, onCardClick, closeOpenModal } = props;
+  const onClick = () => {
     closeOpenModal(true);
-    if (character) this.props.onCardClick(character);
+    if (character) onCardClick(character);
   };
-  render() {
-    const { character } = this.props;
-    const card =
-      character == null ? null : (
-        <section className="card" onClick={this.onCardClick}>
-          <img src={character.image} alt="image of character" className="card-img" />
-          <p>{`name: ${character.name}`}</p>
-          <p>{`gender: ${character.gender}`}</p>
-          <p>{`status: ${character.status}`}</p>
-        </section>
-      );
-    return card;
-  }
+  return (
+    <section className="card" onClick={onClick}>
+      <img src={character.image} alt="image of character" className="card-img" />
+      <p>{`name: ${character.name}`}</p>
+      <p>{`gender: ${character.gender}`}</p>
+      <p>{`status: ${character.status}`}</p>
+    </section>
+  );
 }

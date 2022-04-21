@@ -21,7 +21,7 @@ export interface ICardsProps {
 
 export interface ICardState {}
 export interface ICardProps {
-  character: null | Character;
+  character: Character;
   onCardClick: (character: Character) => void;
   closeOpenModal: (isModal: boolean) => void;
 }
