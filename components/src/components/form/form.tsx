@@ -2,25 +2,10 @@ import React, { Component, RefObject } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form.css';
 import './switcher.css';
-import { errorDataChecking, errorHandler } from './errorHandler';
-import { IFormProp, IFormState } from '../../types/types';
 
-// enum GenderEnum {
-//   female = 'female',
-//   male = 'male',
-//   other = 'other',
-// }
+import { IFormInputs, IFormProp } from '../../types/types';
 
-interface IFormInputs {
-  nameInput: string;
-  select: string;
-  date: Date;
-  photo: FileList;
-  gender: boolean;
-  checkbox: boolean;
-}
-
-export default function Form() {
+export default function Form(props: IFormProp) {
   const {
     register,
     formState: { errors, isValid },
@@ -28,6 +13,8 @@ export default function Form() {
     reset,
   } = useForm<IFormInputs>({ mode: 'onSubmit' });
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+    const { checkbox, ...dataFormCard } = data;
+    props.formOnSubmit(dataFormCard);
     reset();
   };
 
@@ -74,8 +61,8 @@ export default function Form() {
 
       <label>
         Upload photo:
-        <input role="upload-file" type="file" {...register('photo', { required: true })} />
-        <p className="error-message">{errors.photo && '*add photo'}</p>
+        <input role="upload-file" type="file" {...register('files', { required: true })} />
+        <p className="error-message">{errors.files && '*add photo'}</p>
       </label>
 
       <label className="form-element">
@@ -87,7 +74,7 @@ export default function Form() {
         />
         <p className="error-message">{errors.checkbox && '*must be checked'}</p>
       </label>
-      <input type="submit" disabled={!isValid} />
+      <input type="submit" />
     </form>
   );
 }

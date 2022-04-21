@@ -38,40 +38,49 @@ export interface IModalProps {
   closeOpenModal: (isModal: boolean) => void;
 }
 
-interface IErrorState {
-  nameInput?: string;
-  select?: string;
-  checkbox?: string | boolean;
-  gender?: string | boolean;
-  date?: string;
-  photo?: string;
+// interface IErrorState {
+//   nameInput?: string;
+//   select?: string;
+//   checkbox?: string | boolean;
+//   gender?: string | boolean;
+//   date?: string;
+//   photo?: string;
+// }
+// export interface IErrors extends Partial<IErrorState> {
+//   files?: FileList | null | undefined | '';
+// }
+export interface IFormInputs {
+  nameInput: string;
+  select: string;
+  date: Date;
+  files: FileList;
+  gender: boolean;
+  checkbox: boolean;
 }
-export interface IErrors extends Partial<IErrorState> {
-  files?: FileList | null | undefined | '';
-}
-
 export interface IFormProp {
-  formOnSubmit: (obj: IErrors) => void;
+  formOnSubmit: (obj: ICardForm) => void;
 }
-export interface IFormState {
-  errors: IErrorState;
-  submintDisabled: boolean;
-}
+// export interface IFormState {
+//   errors: IErrorState;
+//   submintDisabled: boolean;
+// }
 
 export interface IFormPageProp {}
 export interface IFormPageState {
-  formCards: ICardForm[] | null;
+  formCards: ICardFormID[] | null;
 }
 export interface ICardForm {
-  nameInput?: string;
-  select?: string;
-  gender?: string | boolean;
-  date?: string;
-  files?: FileList | null | '';
-  id?: number;
+  nameInput: string;
+  select: string;
+  gender: boolean;
+  date: Date;
+  files: FileList;
+}
+export interface ICardFormID extends ICardForm {
+  id: number;
 }
 
 export interface IFormCardsProps {
-  formCards: ICardForm[] | null;
+  formCards: ICardFormID[] | null;
 }
 export interface IFormCardsState {}
