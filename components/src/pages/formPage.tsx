@@ -1,10 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import Form from '../components/form';
 import FormCards from '../components/formCards';
-import { ICardForm, ICardFormID, IFormPageProp, IFormPageState } from '../types/types';
+import { ICardForm, ICardFormID } from '../types/types';
 import './main.css';
 
-export default function FormPage(props: IFormPageProp) {
+export default function FormPage() {
   let maxId = 0;
   const [formsCards, setFormCards] = useState<ICardFormID[]>([]);
   const formOnSubmit = (obj: ICardForm) => {
@@ -12,7 +12,6 @@ export default function FormPage(props: IFormPageProp) {
     const formCard: ICardFormID = { ...obj, id: maxId++ };
     const formCards: ICardFormID[] =
       oldFormCards !== null ? [...oldFormCards, formCard] : [formCard];
-    //formCards.push(formCard);
     setFormCards(formCards);
   };
 

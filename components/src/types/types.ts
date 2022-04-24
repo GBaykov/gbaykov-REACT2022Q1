@@ -4,7 +4,7 @@ export interface SearchBarState {
   inputValue: null | string;
 }
 export interface SearchBarProps {
-  onSearchSubmit: (inputValue: null | string) => void;
+  onSearchSubmit: (inputValue: string) => void;
 }
 
 export interface ICardsState {
@@ -34,7 +34,7 @@ export interface IMainPageState {
 export interface IMainPageProps {}
 
 export interface IModalProps {
-  character: null | Character;
+  character: Character;
   closeOpenModal: (isModal: boolean) => void;
 }
 
@@ -81,6 +81,6 @@ export interface ICardFormID extends ICardForm {
 }
 
 export interface IFormCardsProps {
-  formCards: ICardFormID[] | null;
+  formCards: ICardFormID[];
 }
 export interface IFormCardsState {}

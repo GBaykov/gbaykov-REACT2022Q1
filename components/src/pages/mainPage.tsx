@@ -1,37 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Cards from '../components/cards';
+import ErrorMessage from '../components/errorMessage';
 import Modal from '../components/modal';
 import SearchBar from '../components/search';
 import { Character } from '../types/api-interfacies';
-import { IMainPageProps, IMainPageState } from '../types/types';
 import './main.css';
 
-export default class MainPage extends Component<IMainPageProps, IMainPageState> {
-  state = { inputValue: '', character: null, isModal: true };
-  onSearchSubmit = (inputValue: null | string) => {
-    this.setState({ inputValue });
+export default function MainPage() {
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  //КАК МОЖНО ИЗБЕЖАТЬ ИСПОЛЬЗОВАНИЯ NULL В ДАННОМ СЛУЧАЕ?
+  //ИСПОЛЬЗОВАТЬ ЗАГЛУШКУ-ОБЪЕКТ ИЛИ КАК? ВЕДЬ ЕСЛИ НИЧЕГО НЕ ПЕРЕДАТЬ В КАЧЕСТВЕ АРГУМЕНТА, БУДЕТ undefined
+  const [character, setCharacter] = useState<Character | null>(null);
+
+  const onSearchSubmit = (inputValue: string) => {
+    setInputValue(inputValue);
   };
-  onCardClick = (character: Character) => {
-    this.setState({ character });
+  const onCardClick = (character: Character) => {
+    setCharacter(character);
   };
-  closeOpenModal = (isModal: boolean) => {
-    this.setState({ isModal });
+  const closeOpenModal = (isModal: boolean) => {
+    setIsModal(isModal);
   };
-  render() {
-    const modal = this.state.isModal ? (
-      <Modal character={this.state.character} closeOpenModal={this.closeOpenModal} />
-    ) : null;
-    return (
-      <main className="main">
-        <h1>Main Page</h1>
-        <SearchBar onSearchSubmit={this.onSearchSubmit} />
-        <Cards
-          inputValue={this.state.inputValue}
-          onCardClick={this.onCardClick}
-          closeOpenModal={this.closeOpenModal}
-        />
-        {modal}
-      </main>
-    );
-  }
+
+  const modal = () => {
+    if (!!character && isModal) {
+      return <Modal character={character} closeOpenModal={closeOpenModal} />;
+    } else return <ErrorMessage />;
+  };
+
+  return (
+    <main className="main">
+      <h1>Main Page</h1>
+      <SearchBar onSearchSubmit={onSearchSubmit} />
+      <Cards inputValue={inputValue} onCardClick={onCardClick} closeOpenModal={closeOpenModal} />
+      {modal}
+    </main>
+  );
 }
