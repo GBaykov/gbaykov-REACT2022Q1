@@ -18,11 +18,6 @@ export default function SearchBar(props: SearchBarProps) {
     };
   });
 
-  // constructor(props: SearchBarProps) {
-  //   super(props);
-
-  //   this.componentCleanup = this.componentCleanup.bind(this);
-  // }
   const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setInputValue(e.currentTarget.value);
   };
@@ -30,19 +25,6 @@ export default function SearchBar(props: SearchBarProps) {
   function componentCleanup() {
     localStorage.setItem('inputValue', inputValue);
   }
-
-  // componentDidMount = () => {
-  //   const inputValue = localStorage.getItem('inputValue');
-  //   this.setState({
-  //     inputValue,
-  //   });
-  //   window.addEventListener('beforeunload', this.componentCleanup);
-  // };
-
-  // componentWillUnmount = () => {
-  //   this.componentCleanup();
-  //   window.removeEventListener('beforeunload', this.componentCleanup);
-  // };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

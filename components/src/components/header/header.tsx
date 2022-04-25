@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './header.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import MainPage from '../../pages/mainPage';
 import ErrorPage from '../../pages/errorPage';
 import AboutUsPage from '../../pages/aboutUs';
 import FormPage from '../../pages/formPage';
+import { IPagesNames } from '../../types/types';
 
-export default class Header extends Component {
-  maxId = 1;
+export default function Header() {
+  let maxId = 1;
+  const pagesN = [
+    createItem('Main Page', ''),
+    createItem('About Us', 'about'),
+    createItem('Forms', 'forms'),
+  ];
+  const [pagesNames, setPages] = useState<IPagesNames[]>(pagesN);
 
-  state = {
-    pagesNames: [
-      this.createItem('Main Page', ''),
-      this.createItem('About Us', 'about'),
-      this.createItem('Forms', 'forms'),
-    ],
-  };
-
-  createItem(label: string | undefined, href: string | undefined) {
+  function createItem(label: string, href: string) {
     return {
       label,
       href,
-      id: this.maxId++,
+      id: maxId++,
     };
   }
 
-  pages = this.state.pagesNames.map((page) => {
+  const pages = pagesNames.map((page) => {
     return (
       <Link className="headder-link" to={`/${page.href}`} key={page.id}>
         {page.label}
@@ -33,17 +32,15 @@ export default class Header extends Component {
     );
   });
 
-  render() {
-    return (
-      <>
-        <header className="header">{this.pages}</header>
-        <Routes>
-          <Route path="forms" element={<FormPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about" element={<AboutUsPage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </>
-    );
-  }
+  return (
+    <>
+      <header className="header">{pages}</header>
+      <Routes>
+        <Route path="forms" element={<FormPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
+  );
 }

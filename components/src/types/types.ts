@@ -1,36 +1,21 @@
 import { Character } from './api-interfacies';
 
-export interface SearchBarState {
-  inputValue: null | string;
-}
 export interface SearchBarProps {
   onSearchSubmit: (inputValue: string) => void;
 }
 
-export interface ICardsState {
-  inputValue: null | string;
-  isLoading: boolean;
-  characters: null | Character[] | undefined;
-  isError: boolean;
-}
 export interface ICardsProps {
   inputValue: string;
   onCardClick: (character: Character) => void;
   closeOpenModal: (isModal: boolean) => void;
 }
 
-export interface ICardState {}
 export interface ICardProps {
   character: Character;
   onCardClick: (character: Character) => void;
   closeOpenModal: (isModal: boolean) => void;
 }
 
-// export interface IMainPageState {
-//   inputValue: null | string;
-//   character: null | Character;
-//   isModal: boolean;
-// }
 export interface IMainPageProps {}
 
 export interface IModalProps {
@@ -38,17 +23,6 @@ export interface IModalProps {
   closeOpenModal: (isModal: boolean) => void;
 }
 
-// interface IErrorState {
-//   nameInput?: string;
-//   select?: string;
-//   checkbox?: string | boolean;
-//   gender?: string | boolean;
-//   date?: string;
-//   photo?: string;
-// }
-// export interface IErrors extends Partial<IErrorState> {
-//   files?: FileList | null | undefined | '';
-// }
 export interface IFormInputs {
   nameInput: string;
   select: string;
@@ -60,15 +34,9 @@ export interface IFormInputs {
 export interface IFormProp {
   formOnSubmit: (obj: ICardForm) => void;
 }
-// export interface IFormState {
-//   errors: IErrorState;
-//   submintDisabled: boolean;
-// }
 
 export interface IFormPageProp {}
-export interface IFormPageState {
-  formCards: ICardFormID[] | null;
-}
+
 export interface ICardForm {
   nameInput: string;
   select: string;
@@ -84,3 +52,9 @@ export interface IFormCardsProps {
   formCards: ICardFormID[];
 }
 export interface IFormCardsState {}
+
+export interface IPagesNames {
+  label: string;
+  href: string;
+  id: number;
+}

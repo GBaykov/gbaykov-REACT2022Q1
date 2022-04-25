@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ICardsProps, ICardsState } from '../../types/types';
+import { ICardsProps } from '../../types/types';
 import Card from '../card';
 import './cards.css';
 import Api from '../../services/api';
@@ -18,18 +18,6 @@ export default function Cards(props: ICardsProps) {
     setInputValue(props.inputValue);
     addCharacter();
   }, [props.inputValue]);
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // });
-
-  // function componentDidUpdate(prevProps: ICardsProps) {
-  //   if (props.inputValue !== prevProps.inputValue) {
-  //     setInputValue(props.inputValue);
-  //     addCharacter();
-  //   }
-  //   // this.setState({ isLoading: false });
-  // }
 
   const addCharacter = async () => {
     try {
