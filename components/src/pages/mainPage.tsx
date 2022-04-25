@@ -25,7 +25,6 @@ export default function MainPage() {
   };
 
   const modal = () => {
-    console.log('ON CLICK IN MODAL', isModal);
     if (!!character && isModal) {
       return <Modal character={character} closeOpenModal={closeOpenModal} />;
     }
