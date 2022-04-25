@@ -25,9 +25,10 @@ export default function MainPage() {
   };
 
   const modal = () => {
+    console.log('ON CLICK IN MODAL', isModal);
     if (!!character && isModal) {
       return <Modal character={character} closeOpenModal={closeOpenModal} />;
-    } else return <ErrorMessage />;
+    }
   };
 
   return (
@@ -35,7 +36,7 @@ export default function MainPage() {
       <h1>Main Page</h1>
       <SearchBar onSearchSubmit={onSearchSubmit} />
       <Cards inputValue={inputValue} onCardClick={onCardClick} closeOpenModal={closeOpenModal} />
-      {modal}
+      {modal()}
     </main>
   );
 }

@@ -6,6 +6,7 @@ export default function Modal({ character, closeOpenModal }: IModalProps) {
   const onModalClose = () => {
     closeOpenModal(false);
   };
+
   return (
     <>
       <div className="overlay" onClick={onModalClose} />

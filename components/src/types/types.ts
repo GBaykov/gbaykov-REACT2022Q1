@@ -14,7 +14,7 @@ export interface ICardsState {
   isError: boolean;
 }
 export interface ICardsProps {
-  inputValue: null | string;
+  inputValue: string;
   onCardClick: (character: Character) => void;
   closeOpenModal: (isModal: boolean) => void;
 }
@@ -26,11 +26,11 @@ export interface ICardProps {
   closeOpenModal: (isModal: boolean) => void;
 }
 
-export interface IMainPageState {
-  inputValue: null | string;
-  character: null | Character;
-  isModal: boolean;
-}
+// export interface IMainPageState {
+//   inputValue: null | string;
+//   character: null | Character;
+//   isModal: boolean;
+// }
 export interface IMainPageProps {}
 
 export interface IModalProps {

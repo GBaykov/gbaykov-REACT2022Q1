@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ICardsProps, ICardsState } from '../../types/types';
 import Card from '../card';
 import './cards.css';
@@ -7,59 +7,59 @@ import { Character } from '../../types/api-interfacies';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
 
-export default class Cards extends Component<ICardsProps, ICardsState> {
-  api = new Api();
-  state = {
-    inputValue: '',
-    characters: [],
-    isLoading: false,
-    isError: false,
-  };
+export default function Cards(props: ICardsProps) {
+  const api = new Api();
+  const [inputValue, setInputValue] = useState<string>('');
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
-  componentDidUpdate(prevProps: ICardsProps) {
-    if (this.props.inputValue !== prevProps.inputValue) {
-      this.setState({ inputValue: this.props.inputValue });
-      this.addCharacter();
-    }
-    // this.setState({ isLoading: false });
-  }
+  useEffect(() => {
+    setInputValue(props.inputValue);
+    addCharacter();
+  }, [props.inputValue]);
 
-  addCharacter = async () => {
+  // useEffect(() => {
+  //   setIsLoading(false);
+  // });
+
+  // function componentDidUpdate(prevProps: ICardsProps) {
+  //   if (props.inputValue !== prevProps.inputValue) {
+  //     setInputValue(props.inputValue);
+  //     addCharacter();
+  //   }
+  //   // this.setState({ isLoading: false });
+  // }
+
+  const addCharacter = async () => {
     try {
-      await this.setState({ isLoading: true });
-      const characters = await this.api.getCharacter(this.props.inputValue);
-      this.setState({ characters });
-      this.setState({ isLoading: false });
-      this.setState({ isError: false });
+      setIsLoading(true);
+      const characters = await api.getCharacter(props.inputValue);
+      setCharacters(characters);
+      setIsLoading(false);
+      setIsError(false);
     } catch (err) {
-      console.log(err);
-      this.setState({ isLoading: false });
-      this.setState({ isError: true });
+      setIsLoading(false);
+      setIsError(true);
     }
   };
 
-  render() {
-    const { characters, isLoading, isError } = this.state;
-    const { onCardClick, closeOpenModal } = this.props;
-    if (characters == null || !characters) {
-      return null;
-    }
-    if (isLoading) return <Spinner />;
-    if (isError) return <ErrorMessage />;
-    return (
-      <section className="cards-field">
-        {characters.map((character: Character | null) => {
-          if (character == null) return null;
-          return (
-            <Card
-              character={character}
-              key={character.id}
-              onCardClick={onCardClick}
-              closeOpenModal={closeOpenModal}
-            />
-          );
-        })}
-      </section>
-    );
-  }
+  const { onCardClick, closeOpenModal } = props;
+
+  if (isLoading) return <Spinner />;
+  if (isError) return <ErrorMessage />;
+  return (
+    <section className="cards-field">
+      {characters.map((character: Character) => {
+        return (
+          <Card
+            character={character}
+            key={character.id}
+            onCardClick={onCardClick}
+            closeOpenModal={closeOpenModal}
+          />
+        );
+      })}
+    </section>
+  );
 }
