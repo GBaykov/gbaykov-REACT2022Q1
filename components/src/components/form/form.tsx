@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form.css';
 import './switcher.css';
 
 import { IFormInputs, IFormProp } from '../../types/types';
 import { validateDate } from './errorHandler';
+import { FormPageContext } from '../../pages/formPage';
 
-export default function Form(props: IFormProp) {
+export default function Form() {
+  const { dispatch } = useContext(FormPageContext);
   const {
     register,
     formState: { errors },
@@ -15,7 +17,8 @@ export default function Form(props: IFormProp) {
   } = useForm<IFormInputs>({ mode: 'onSubmit' });
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     const { checkbox, ...dataFormCard } = data;
-    props.formOnSubmit(dataFormCard);
+    dispatch({ type: 'formCard', payload: dataFormCard });
+    // props.formOnSubmit(dataFormCard);
     reset();
   };
 

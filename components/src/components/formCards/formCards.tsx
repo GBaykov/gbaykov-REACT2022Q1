@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FormPageContext } from '../../pages/formPage';
 import { IFormCardsProps } from '../../types/types';
 import './formCards.css';
 
-export default function FormCards(props: IFormCardsProps) {
-  const cards = props.formCards.map((formCard) => {
+export default function FormCards() {
+  const { state } = useContext(FormPageContext);
+  const cards = state.map((formCard) => {
+    console.log(formCard.files[0]);
     if (formCard.files) {
       return (
         <div className="form-card" key={formCard.id}>
