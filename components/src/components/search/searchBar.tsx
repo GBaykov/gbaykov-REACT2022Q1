@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { MainPageContext } from '../../pages/mainPage';
+import { ReducerConsts } from '../../types/mainPageStoreTypes';
 import { SearchBarProps } from '../../types/types';
 import './search.css';
 
-export default function SearchBar(props: SearchBarProps) {
+export default function SearchBar() {
   const [inputValue, setInputValue] = useState<string>('');
+  // const { input, setLocalInput } = useState<string>('');
+  const { state, dispatch } = useContext(MainPageContext);
 
   useEffect(() => {
     const inputValueLS = localStorage.getItem('inputValue');
@@ -28,7 +32,7 @@ export default function SearchBar(props: SearchBarProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    props.onSearchSubmit(inputValue);
+    dispatch({ type: ReducerConsts.inputValue, payload: { inputValue: inputValue } });
   };
 
   return (

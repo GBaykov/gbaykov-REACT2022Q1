@@ -12,8 +12,8 @@ export interface ICardsProps {
 
 export interface ICardProps {
   character: Character;
-  onCardClick: (character: Character) => void;
-  closeOpenModal: (isModal: boolean) => void;
+  // onCardClick: (character: Character) => void;
+  // closeOpenModal: (isModal: boolean) => void;
 }
 
 export interface IMainPageProps {}
