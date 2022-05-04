@@ -25,6 +25,7 @@ export default function FormCards() {
           </p>
           <img
             className="form-card_img"
+            // src={URL.createObjectURL(formCard.files[0])}
             src={URL.createObjectURL(new Blob(binaryData, { type: 'application/zip' }))}
           />
         </div>
