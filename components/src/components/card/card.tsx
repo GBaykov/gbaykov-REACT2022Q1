@@ -9,11 +9,9 @@ export default function Card(props: ICardProps): JSX.Element {
   const { character } = props;
   const onClick = () => {
     dispatch({ type: ReducerConsts.isModal, payload: { isModal: true } });
-    // closeOpenModal(true);
     if (character) {
       dispatch({ type: ReducerConsts.character, payload: { character: character } });
     }
-    // onCardClick(character);
   };
   return (
     <section className="card" onClick={onClick}>

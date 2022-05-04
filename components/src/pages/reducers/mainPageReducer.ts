@@ -3,7 +3,6 @@ import { IActionType, IMainState } from '../../types/mainPageStoreTypes';
 export const mainPageRender = (state: IMainState, action: IActionType): IMainState => {
   switch (action.type) {
     case 'isModal':
-      console.log(action.payload.isModal);
       if (!!action.payload.isModal) {
         return {
           ...state,

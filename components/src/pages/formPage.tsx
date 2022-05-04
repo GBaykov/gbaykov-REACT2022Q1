@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Form from '../components/form';
 import FormCards from '../components/formCards';
 import { ICardForm, ICardFormID } from '../types/types';
@@ -22,15 +22,6 @@ export const FormPageContext = React.createContext<{
 
 export default function FormPage() {
   const [state, dispatch] = useReducer(formPageReducer, initialFormPageState);
-  // let maxId = 0;
-  // const [formsCards, setFormCards] = useState<ICardFormID[]>([]);
-  // const formOnSubmit = (obj: ICardForm) => {
-  //   const oldFormCards = formsCards;
-  //   const formCard: ICardFormID = { ...obj, id: maxId++ };
-  //   const formCards: ICardFormID[] =
-  //     oldFormCards !== null ? [...oldFormCards, formCard] : [formCard];
-  //   setFormCards(formCards);
-  // };
 
   return (
     <main className="main">

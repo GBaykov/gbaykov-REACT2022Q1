@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { MainPageContext } from '../../pages/mainPage';
 import { ReducerConsts } from '../../types/mainPageStoreTypes';
-import { SearchBarProps } from '../../types/types';
 import './search.css';
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState<string>('');
-  // const { input, setLocalInput } = useState<string>('');
   const { state, dispatch } = useContext(MainPageContext);
 
   useEffect(() => {

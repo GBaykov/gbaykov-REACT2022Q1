@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ICardsProps } from '../../types/types';
 import Card from '../card';
 import './cards.css';
 import Api from '../../services/api';
@@ -13,14 +12,11 @@ export default function Cards() {
   const { state, dispatch } = useContext(MainPageContext);
   const { inputValue, characters } = state;
   const api = new Api();
-  // const [inputValue, setInputValue] = useState<string>('');
-  // const [characters, setCharacters] = useState<Character[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch({ type: ReducerConsts.inputValue, payload: { inputValue: inputValue } });
-    // setInputValue(props.inputValue);
     addCharacter();
   }, [inputValue]);
 
@@ -29,7 +25,6 @@ export default function Cards() {
       setIsLoading(true);
       const characters = await api.getCharacter(inputValue);
       dispatch({ type: ReducerConsts.characters, payload: { characters: characters } });
-      // setCharacters(characters);
       setIsLoading(false);
       setIsError(false);
     } catch (err) {
@@ -37,8 +32,6 @@ export default function Cards() {
       setIsError(true);
     }
   };
-
-  // const { onCardClick, closeOpenModal } = props;
 
   if (isLoading) return <Spinner />;
   if (isError) return <ErrorMessage />;

@@ -4,17 +4,13 @@ import { ReducerConsts } from '../../types/mainPageStoreTypes';
 import './modal.css';
 
 export default function Modal() {
-  // const onModalClose = () => {
-  //   closeOpenModal(false);
-  // };
   const { state, dispatch } = useContext(MainPageContext);
   const { character } = state;
 
   const onModalClose = () => {
     dispatch({ type: ReducerConsts.isModal, payload: { isModal: false } });
   };
-  //if (state.isModal !== false) return null;
-  // if (!!state.character && state.isModal) {
+
   return (
     <>
       <div className="overlay" onClick={onModalClose} />
@@ -34,5 +30,4 @@ export default function Modal() {
       </div>
     </>
   );
-  // } else return null;
 }

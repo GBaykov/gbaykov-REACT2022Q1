@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import Cards from '../components/cards';
 import Modal from '../components/modal';
 import SearchBar from '../components/search';
-import { Character } from '../types/api-interfacies';
 import { IActionType, IMainState } from '../types/mainPageStoreTypes';
 import './main.css';
 import { mainPageRender } from './reducers/mainPageReducer';

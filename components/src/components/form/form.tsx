@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import './form.css';
 import './switcher.css';
 
-import { IFormInputs, IFormProp } from '../../types/types';
+import { IFormInputs } from '../../types/types';
 import { validateDate } from './errorHandler';
 import { FormPageContext } from '../../pages/formPage';
 
@@ -18,7 +18,6 @@ export default function Form() {
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     const { checkbox, ...dataFormCard } = data;
     dispatch({ type: 'formCard', payload: dataFormCard });
-    // props.formOnSubmit(dataFormCard);
     reset();
   };
 
@@ -66,7 +65,13 @@ export default function Form() {
 
       <label>
         Upload photo:
-        <input role="upload-file" type="file" {...register('files', { required: true })} />
+        <input
+          role="upload-file"
+          type="file"
+          {...register('files', {
+            required: true,
+          })}
+        />
         <p className="error-message">{errors.files && '*add photo'}</p>
       </label>
 
