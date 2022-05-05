@@ -5,19 +5,27 @@ import './switcher.css';
 
 import { IFormInputs } from '../../types/types';
 import { validateDate } from './errorHandler';
-import { FormPageContext } from '../../pages/formPage';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { formSlice } from '../../store/reducers/FormSlice';
+// import { FormPageContext } from '../../pages/formPage';
+let maxId = 0;
 
 export default function Form() {
-  const { dispatch } = useContext(FormPageContext);
+  // const { dispatch } = useContext(FormPageContext);
+  //const state = useAppSelector((state) => state.formReducer);
+  const { setFormCards } = formSlice.actions;
+  const dispatch = useAppDispatch();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm<IFormInputs>({ mode: 'onSubmit' });
+
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     const { checkbox, ...dataFormCard } = data;
-    dispatch({ type: 'formCard', payload: dataFormCard });
+    dispatch(setFormCards({ ...dataFormCard, id: maxId++ }));
     reset();
   };
 
