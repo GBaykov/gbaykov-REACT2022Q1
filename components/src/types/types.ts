@@ -7,7 +7,7 @@ import { Character } from './api-interfacies';
 // }
 
 export interface ICardProps {
-  character: Character;
+  hero: Character;
 }
 
 export interface IMainPageProps {}

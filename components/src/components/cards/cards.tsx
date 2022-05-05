@@ -5,18 +5,24 @@ import Api from '../../services/api';
 import { Character } from '../../types/api-interfacies';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
-import { MainPageContext } from '../../pages/mainPage';
+//import { MainPageContext } from '../../pages/mainPage';
 import { ReducerConsts } from '../../types/mainPageStoreTypes';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { mainSlice } from '../../store/reducers/MainPageSlice';
 
 export default function Cards() {
-  const { state, dispatch } = useContext(MainPageContext);
-  const { inputValue, characters } = state;
+  // const { state, dispatch } = useContext(MainPageContext);
+  // const { inputValue, characters } = state;
+  const { inputValue, characters } = useAppSelector((state) => state.mainReducer);
+  const dispatch = useAppDispatch();
+  const { setCharacters, setInput } = mainSlice.actions;
+
   const api = new Api();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch({ type: ReducerConsts.inputValue, payload: { inputValue: inputValue } });
+    dispatch(setInput(inputValue));
     addCharacter();
   }, [inputValue]);
 
@@ -24,7 +30,7 @@ export default function Cards() {
     try {
       setIsLoading(true);
       const characters = await api.getCharacter(inputValue);
-      dispatch({ type: ReducerConsts.characters, payload: { characters: characters } });
+      dispatch(setCharacters(characters));
       setIsLoading(false);
       setIsError(false);
     } catch (err) {
@@ -38,7 +44,7 @@ export default function Cards() {
   return (
     <section className="cards-field">
       {characters.map((character: Character) => {
-        return <Card character={character} key={character.id} />;
+        return <Card hero={character} key={character.id} />;
       })}
     </section>
   );

@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { MainPageContext } from '../../pages/mainPage';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+// import { MainPageContext } from '../../pages/mainPage';
+import { mainSlice } from '../../store/reducers/MainPageSlice';
 import { ReducerConsts } from '../../types/mainPageStoreTypes';
 import './search.css';
 
 export default function SearchBar() {
-  const [inputValue, setInputValue] = useState<string>('');
-  const { state, dispatch } = useContext(MainPageContext);
+  const [localInput, setLocalInput] = useState<string>('');
+  // const { state, dispatch } = useContext(MainPageContext);
+  // const { inputValue } = useAppSelector((state) => state.mainReducer);
+  const { setInput } = mainSlice.actions;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const inputValueLS = localStorage.getItem('inputValue');
-    if (!!inputValueLS) setInputValue(inputValueLS);
+    if (!!inputValueLS) setLocalInput(inputValueLS);
     window.addEventListener('beforeunload', componentCleanup);
   }, []);
 
@@ -21,16 +26,16 @@ export default function SearchBar() {
   });
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget.value);
+    setLocalInput(e.currentTarget.value);
   };
 
   function componentCleanup() {
-    localStorage.setItem('inputValue', inputValue);
+    localStorage.setItem('inputValue', localInput);
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch({ type: ReducerConsts.inputValue, payload: { inputValue: inputValue } });
+    dispatch(setInput(localInput));
   };
 
   return (
@@ -40,7 +45,7 @@ export default function SearchBar() {
           className="searchbar"
           placeholder="Search area"
           type="text"
-          value={inputValue}
+          value={localInput}
           onChange={onInputChange}
         />
       </label>
