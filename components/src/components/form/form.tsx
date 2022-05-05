@@ -1,18 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './form.css';
 import './switcher.css';
 
 import { IFormInputs } from '../../types/types';
 import { validateDate } from './errorHandler';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { formSlice } from '../../store/reducers/FormSlice';
-// import { FormPageContext } from '../../pages/formPage';
 let maxId = 0;
 
 export default function Form() {
-  // const { dispatch } = useContext(FormPageContext);
-  //const state = useAppSelector((state) => state.formReducer);
   const { setFormCards } = formSlice.actions;
   const dispatch = useAppDispatch();
 

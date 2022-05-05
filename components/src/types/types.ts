@@ -1,11 +1,5 @@
 import { Character } from './api-interfacies';
 
-// export interface ICardsProps {
-//   inputValue: string;
-//   onCardClick: (character: Character) => void;
-//   closeOpenModal: (isModal: boolean) => void;
-// }
-
 export interface ICardProps {
   hero: Character;
 }

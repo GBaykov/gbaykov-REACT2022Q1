@@ -1,13 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useAppSelector } from '../../hooks/redux';
-//import { FormPageContext } from '../../pages/formPage';
 import './formCards.css';
 
 export default function FormCards() {
-  //const { state } = useContext(FormPageContext);
   const state = useAppSelector((state) => state.formReducer);
-  // const { setFormCards } = formSlice.actions;
-  // const dispatch = useAppDispatch();
 
   const cards = state.map((formCard) => {
     if (formCard.files) {

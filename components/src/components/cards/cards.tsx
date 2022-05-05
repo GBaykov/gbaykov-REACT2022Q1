@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../card';
 import './cards.css';
 import Api from '../../services/api';
 import { Character } from '../../types/api-interfacies';
 import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
-//import { MainPageContext } from '../../pages/mainPage';
-import { ReducerConsts } from '../../types/mainPageStoreTypes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { mainSlice } from '../../store/reducers/MainPageSlice';
 
 export default function Cards() {
-  // const { state, dispatch } = useContext(MainPageContext);
-  // const { inputValue, characters } = state;
   const { inputValue, characters } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
   const { setCharacters, setInput } = mainSlice.actions;

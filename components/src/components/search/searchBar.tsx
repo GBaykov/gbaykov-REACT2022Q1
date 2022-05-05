@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-// import { MainPageContext } from '../../pages/mainPage';
+import React, { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../hooks/redux';
 import { mainSlice } from '../../store/reducers/MainPageSlice';
-import { ReducerConsts } from '../../types/mainPageStoreTypes';
 import './search.css';
 
 export default function SearchBar() {
   const [localInput, setLocalInput] = useState<string>('');
-  // const { state, dispatch } = useContext(MainPageContext);
-  // const { inputValue } = useAppSelector((state) => state.mainReducer);
   const { setInput } = mainSlice.actions;
   const dispatch = useAppDispatch();
 

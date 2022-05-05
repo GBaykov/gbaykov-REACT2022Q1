@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { mainSlice } from '../../store/reducers/MainPageSlice';
-//import { MainPageContext } from '../../pages/mainPage';
-import { ReducerConsts } from '../../types/mainPageStoreTypes';
+
 import './modal.css';
 
 export default function Modal() {
-  //const { state, dispatch } = useContext(MainPageContext);
-  //const { character } = state;
   const { character } = useAppSelector((state) => state.mainReducer);
   const { setIsModal } = mainSlice.actions;
   const dispatch = useAppDispatch();

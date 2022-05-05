@@ -1,14 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './card.css';
 import { ICardProps } from '../../types/types';
-//import { MainPageContext } from '../../pages/mainPage';
-import { ReducerConsts } from '../../types/mainPageStoreTypes';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { mainSlice } from '../../store/reducers/MainPageSlice';
 
 export default function Card(props: ICardProps): JSX.Element {
-  //const { state, dispatch } = useContext(MainPageContext);
-  //const { character } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
   const { setCharacter, setIsModal } = mainSlice.actions;
   const { hero } = props;
