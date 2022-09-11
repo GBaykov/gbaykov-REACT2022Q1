@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-export default class AboutUsPage extends Component {
-  render() {
-    return (
-      <main>
-        <p className="message">ABOUT US</p>
-      </main>
-    );
-  }
+import React from 'react';
+import './main.css';
+
+export default function AboutUsPage() {
+  return (
+    <main className="main">
+      <h1 className="message">ABOUT US</h1>
+    </main>
+  );
 }

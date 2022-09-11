@@ -2,8 +2,16 @@
     background-color: rgb(247, 252, 232);
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    justify-content: center;
 }
 .headder-link{
     margin: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgba(136, 12, 121, 0.963)
+}
+
+.headder-link:hover{
+    color: rgba(184, 105, 8, 0.963)
 }
