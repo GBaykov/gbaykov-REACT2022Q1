@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import './card.css';
+import { ICardProps, ICardState } from '../../types/types';
 
-export default class Сard extends Component {
-  cardProperty = {
-    name: 'Jon',
-    password: 'Gon',
-    age: '18',
-    date: '01/01/0101 ',
+export default class Сard extends Component<ICardProps, ICardState> {
+  onCardClick = () => {
+    const { character, closeOpenModal } = this.props;
+    closeOpenModal(true);
+    if (character) this.props.onCardClick(character);
   };
   render() {
-    return (
-      <section className="card">
-        <p>{`name: ${this.cardProperty.name}`}</p>
-        <p>{`password: ${this.cardProperty.password}`}</p>
-        <p>{`age: ${this.cardProperty.age}`}</p>
-        <p>{`date: ${this.cardProperty.date}`}</p>
-      </section>
-    );
+    const { character } = this.props;
+    const card =
+      character == null ? null : (
+        <section className="card" onClick={this.onCardClick}>
+          <img src={character.image} alt="image of character" className="card-img" />
+          <p>{`name: ${character.name}`}</p>
+          <p>{`gender: ${character.gender}`}</p>
+          <p>{`status: ${character.status}`}</p>
+        </section>
+      );
+    return card;
   }
 }

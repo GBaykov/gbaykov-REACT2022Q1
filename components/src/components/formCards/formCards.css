@@ -1,0 +1,21 @@
+.cards-field{
+    display:flex;
+    flex-wrap: wrap;
+}
+.form-card{
+    box-sizing: border-box;
+    width: 14em;
+    background-color: rgb(237, 245, 245);
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 2px solid rgb(225, 238, 232);
+    border-radius: 10px;
+}
+.form-card_img{
+    max-width: 12em;
+}
+.form-card_text{
+    margin: 5px 10px;
+    border-bottom: 1px solid;
+
+}

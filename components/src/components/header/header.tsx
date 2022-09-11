@@ -4,18 +4,23 @@ import { Routes, Route, Link } from 'react-router-dom';
 import MainPage from '../../pages/mainPage';
 import ErrorPage from '../../pages/errorPage';
 import AboutUsPage from '../../pages/aboutUs';
+import FormPage from '../../pages/formPage';
 
 export default class Header extends Component {
   maxId = 1;
 
   state = {
-    pagesNames: [this.createItem('Main Page', ''), this.createItem('About Us', 'about')],
+    pagesNames: [
+      this.createItem('Main Page', ''),
+      this.createItem('About Us', 'about'),
+      this.createItem('Forms', 'forms'),
+    ],
   };
 
   createItem(label: string | undefined, href: string | undefined) {
     return {
-      label: label,
-      href: href,
+      label,
+      href,
       id: this.maxId++,
     };
   }
@@ -33,6 +38,7 @@ export default class Header extends Component {
       <>
         <header className="header">{this.pages}</header>
         <Routes>
+          <Route path="forms" element={<FormPage />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="*" element={<ErrorPage />} />
