@@ -1,0 +1,7 @@
+.searchbar{
+    border: solid 1px black;
+    border-radius: 5px;
+    width: 520px;
+    height: 50px;
+    margin: 30px 10px;
+}

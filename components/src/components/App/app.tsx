@@ -6,9 +6,7 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <React.Fragment>
-          <Header />
-        </React.Fragment>
+        <Header />
       </BrowserRouter>
     );
   }
