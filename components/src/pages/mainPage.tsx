@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Cards from '../components/cards';
-import SearchBar from '../components/input';
+import Modal from '../components/modal';
+import SearchBar from '../components/search';
+import { useAppSelector } from '../hooks/redux';
+import './main.css';
 
-export default class MainPage extends Component {
-  render() {
-    return (
-      <main>
-        <div>Main Page</div>
-        <SearchBar />
-        <Cards />
-      </main>
-    );
-  }
+export default function MainPage() {
+  const { isModal, character } = useAppSelector((state) => state.mainReducer);
+
+  const modal = () => {
+    return !!character && !!isModal ? <Modal /> : null;
+  };
+
+  return (
+    <main className="main">
+      <h1>Main Page</h1>
+      <SearchBar />
+      <Cards />
+      {modal()}
+    </main>
+  );
 }

@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './card.css';
+import { ICardProps } from '../../types/types';
+import { useAppDispatch } from '../../hooks/redux';
+import { mainSlice } from '../../store/reducers/MainPageSlice';
 
-export default class Сard extends Component {
-  cardProperty = {
-    name: 'Jon',
-    password: 'Gon',
-    age: '18',
-    date: '01/01/0101 ',
+export default function Card(props: ICardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { setCharacter, setIsModal } = mainSlice.actions;
+  const { hero } = props;
+  const onClick = () => {
+    dispatch(setIsModal(true));
+    if (hero) {
+      dispatch(setCharacter(hero));
+    }
   };
-  render() {
-    return (
-      <section className="card">
-        <p>{`name: ${this.cardProperty.name}`}</p>
-        <p>{`password: ${this.cardProperty.password}`}</p>
-        <p>{`age: ${this.cardProperty.age}`}</p>
-        <p>{`date: ${this.cardProperty.date}`}</p>
-      </section>
-    );
-  }
+  return (
+    <section className="card" onClick={onClick}>
+      <img src={hero.image} alt="image of character" className="card-img" />
+      <p>{`name: ${hero.name}`}</p>
+      <p>{`gender: ${hero.gender}`}</p>
+      <p>{`status: ${hero.status}`}</p>
+    </section>
+  );
 }

@@ -1,0 +1,20 @@
+.form{
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 40%;
+    background-color: rgb(235, 245, 240);
+    padding: 5px 10px;
+}
+
+.form-element{
+    display: block;
+    margin-bottom: 15px;
+    max-width:80%;
+}
+
+.error-message{
+    font-size:smaller;
+    font-weight: bold;
+    color: red;
+}
+
